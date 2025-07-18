@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clean Launcher User Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #4581ff;
+      --primary-dark: #2360d2;
+      --accent: #54e7e2;
+      --bright: #63ffd6;
+      --bg: #f7fbff;
+      --card-bg: #fff;
+      --note-bg: linear-gradient(90deg, #63ffd6 0%, #54e7e2 40%, #4581ff 95%);
+      --note-color: #fff;
+      --section-border: #b2dbff;
+      --shadow: 0 2px 16px #4581ff19;
+      --tip-bg: #e6f6ff;
+      --tip-color: #2360d2;
+      --text: #232646;
+      --link: #4581ff;
+      --link-hover: #63ffd6;
+      --footer-text: #7ea3c7;
+      --footer-muted: #b2dbff;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Helvetica Now", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 22px 0 48px 0;
+      transition: background 0.35s, color 0.25s;
+    }
+    .logo-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 8px;
+    }
+    .logo-title img {
+      height: 56px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px #0002;
+      background: var(--card-bg);
+      padding: 4px;
+    }
+    .logo-title h1 {
+      color: var(--primary);
+      margin: 0;
+      font-size: 2.05em;
+      letter-spacing: 0.01em;
+      font-weight: 800;
+    }
+    @media (max-width: 500px) {
+      .logo-title img { height: 38px; }
+      .logo-title { gap: 9px; }
+      .logo-title h1 { font-size: 1.1em; }
+    }
+    .note {
+      color: var(--note-color);
+      background: var(--note-bg);
+      font-weight: bold;
+      margin-bottom: 24px;
+      margin-top: 16px;
+      font-size: 1.07em;
+      text-align: center;
+      border-radius: 14px;
+      box-shadow: 0 1px 12px #54e7e239;
+      padding: 10px 20px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--section-border);
+      padding: 24px 32px 18px 32px;
+      margin-bottom: 32px;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: background 0.3s, color 0.25s;
+    }
+    @media (max-width: 700px) {
+      .section { padding: 16px 7vw; }
+    }
+    @media (max-width: 400px) {
+      .section { padding: 12px 2vw; }
+    }
+    .emoji { font-size: 1.2em; vertical-align: middle; }
+    ul, ol { margin-left: 24px; margin-bottom: 20px; }
+    li { margin-bottom: 16px; line-height: 1.55; }
+    a {
+      color: var(--link);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+    .emoji-list {
+      list-style: none;
+      padding: 0;
+      margin-left: 0;
+    }
+    .emoji-list li {
+      display: block;
+      margin-bottom: 18px;
+      padding-left: 0;
+    }
+    .icon-title-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38em;
+      min-width: 0;
+      /* Allow wrapping if absolutely needed on small screens */
+    }
+    .emoji-list .emoji {
+      font-size: 1.28em;
+      margin-right: 0.10em;
+      width: 1.25em;
+      text-align: center;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .emoji-list .feature-title {
+      font-weight: bold;
+      white-space: nowrap;
+      margin-right: 0.08em;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .tip-box {
+      background: var(--tip-bg);
+      color: var(--tip-color);
+      border-radius: 10px;
+      margin: 26px auto 0 auto;
+      max-width: 430px;
+      padding: 10px 18px;
+      box-shadow: 0 1px 8px #54e7e216;
+      text-align: center;
+      font-size: 1.06em;
+    }
+    .footer-icons img {
+      vertical-align: middle;
+      margin: 0 10px 0 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0001;
+      background: #fff;
+      padding: 2px;
+      transition: box-shadow 0.2s;
+    }
+    .footer-icons img:hover {
+      box-shadow: 0 4px 16px var(--primary-dark)44;
+    }
+    .footer {
+      text-align: center;
+      color: var(--footer-text);
+      font-size: 0.96em;
+      margin-top: 40px;
+    }
+    .footer a { color: var(--footer-text); }
+    .footer span { color: var(--footer-muted); }
+    /* --- DARK MODE --- */
+    body.dark {
+      --bg: #1a2036;
+      --card-bg: #23294d;
+      --note-bg: linear-gradient(90deg, #4581ff 10%, #54e7e2 90%);
+      --note-color: #fff;
+      --section-border: #3264aa;
+      --shadow: 0 2px 16px #4581ff38;
+      --tip-bg: #243063;
+      --tip-color: #54e7e2;
+      --text: #f6faff;
+      --link: #63ffd6;
+      --link-hover: #54e7e2;
+      --footer-text: #6cbcf9;
+      --footer-muted: #54e7e2;
+    }
+    .dark .logo-title h1 { color: #63ffd6; }
+    .dark .logo-title img { background: #23294d; }
+    /* Toggle Button */
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 26px;
+      z-index: 22;
+      background: var(--card-bg);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #0002;
+      cursor: pointer;
+      padding: 7px 16px 7px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.25s, color 0.22s, border 0.19s;
+    }
+    .toggle-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--bright);
+    }
+    @media (max-width: 700px) {
+      .toggle-btn { top: 14px; right: 8px; padding: 6px 13px 6px 11px; font-size: 0.99em;}
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleMode()" title="Toggle dark mode">
+    <span id="toggle-icon" style="font-size:1.2em;">🌙</span> <span id="toggle-label">Dark Mode</span>
+  </button>
+  <div class="logo-title">
+    <img src="https://i.ibb.co/8nvxKkS4/Clean-Launcher-Logo-2.png" alt="Clean Launcher Logo">
+    <h1>Clean Launcher User Guide</h1>
+  </div>
+
+  <div class="note">
+    ⚠️ <b>Before making any changes, always back up your <b>/Mods</b> folder using the <u>Backup</u> feature in <b>More Tools ➡️ Settings &amp; Utilities</b>. This helps protect your game if anything goes wrong.</b>
+  </div>
+
+  <div class="section">
+    <h2><span class="emoji">✨</span> Getting Started</h2>
+    <p>When you first open Clean Launcher, you'll be asked if you want to set up an <b>Auto Mods</b> folder and have <b>Clean Launcher</b> start with your computer.</p>
+    <p><b>Auto Mods</b> creates a new folder in <b>/Mods</b>. Any file, folder, or zip you add will be automatically extracted and/or sorted for you. If it's a <b>Tray</b> or <b>Save</b> file, it will be moved to the correct folder.</p>
+    <p>
+  It makes downloading sprees a breeze — you can right-click the folder, pin it to 
+  <a href="https://support.microsoft.com/en-gb/windows/file-explorer-in-windows-ef370130-1cca-9dc5-e0df-2f7416fe1cb1" target="_blank"><b>Quick Access</b></a>, 
+  and drag your downloads straight into it. All the sorting will be done for you. You can enable or disable this folder at any time in 
+  <b>More Tools ➡️ Settings &amp; Utilities</b>, or by right-clicking <b>Clean Launcher</b> in the tray. If you delete the folder without disabling it, it will regenerate automatically.
+</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="emoji">🚀</span> Main Menu</h2>
+    <ul class="emoji-list">
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">🧹</span>
+          <span class="feature-title">Clean &amp; Launch Sims 4:</span>
+        </span>
+        <br>
+        Cleans cache and error logs, then launches The Sims 4—all in one click. You can also choose to only delete the cache on launch if your <b>/Mods</b> folder has changed! You can also choose a <b>Mods Profile</b> (see 👤<b>Manage Mod Profiles</b>) to switch up your CC for different gameplay styles.
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">🔎</span>
+          <span class="feature-title">Scan Mods Folder:</span>
+        </span>
+        <br>
+        Detect duplicates, hidden scripts, zipped files, missing files, and more. Fix them all with one click, or review each issue individually. When you run the tool, it will automatically scan your <b>/Mods</b> folder, and give you a summary of the issues it's found. You can then expand/collapse each section to view all the problems, <b>Fix Issues</b> one by one, or <b>Fix All</b> to automate the process.
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">📦</span>
+          <span class="feature-title">Drag &amp; Drop Mod Installer:</span>
+        </span>
+        <br>
+        Drag ZIPs or mod files into the installer, or browse for files—they’ll be automatically extracted and sorted into <b>Mods, Tray, or Saves</b>. Use it on it's own, or with <b>Auto Mods</b> depending on your mood! Personally, I use it for adding a ton of new Sims and Builds to my game, as those that come with CC will all be organized for you in a flash.
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="emoji">🛠️</span> More Tools️ ➡️ Settings &amp; Utilities</h2>
+    <ul class="emoji-list">
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">⚙️</span>
+          <span class="feature-title">Settings:</span>
+        </span>
+        <br>
+        Change your <b>/Mods</b> folder or game path, reset folder or path to default, reset launch settings, enable or disable <b>Auto Mods</b> folder, undo the last organize, or set <b>Clean Launcher</b> to start with Windows.
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">🗂️</span>
+          <span class="feature-title">Backup Mods, Saves &amp; Tray:</span>
+        </span>
+        <br>
+        Zip up your <b>Mods, Saves, or Tray</b> for safe backup, or to transfer to a new computer.
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">🧩</span>
+          <span class="feature-title">Organize Mods Folder:</span>
+        </span>
+        <br>
+        Automatically sort your <b>Mods</b> into simple, detailed, or custom categories (undo anytime). You can also edit the folder structure, by clicking <b>Custom</b>. In the next window, you can then toggle between editing the folder names, and the keywords. If you rename or move a parent folder, such as 'CAS', make sure you update all its subfolders too, so they match the new parent folder name or location.
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">👤</span>
+          <span class="feature-title">Manage Mod Profiles:</span>
+        </span>
+        <br>
+        Create different profiles for different playstyles, and switch between them easily. New CC is detected and you’ll be prompted to import before switching.
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="emoji">❓</span> Help & Online</h2>
+    <ul class="emoji-list">
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">📩</span>
+          <span class="feature-title">Contact Me &amp; Send Report:</span>
+        </span>
+        <br>
+        <b>Create Full Report</b> generates an easy-to-read snapshot of your <b>/Mods</b> folder, and your latest <b>LE</b> (lastException) if you have one. You can send it straight to me if you're having issues, or to another creator for troubleshooting! <b>Create Full Report</b> is also available in <b>Scan Mods Folder ➡️ More Help.</b>
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">🐞</span>
+          <span class="feature-title">Report a Bug:</span>
+        </span>
+        <br>
+        Found a bug? Click to report it—it only takes a couple of minutes! <a href="https://form.fillout.com/t/dADtqgpWMnus">Here's</a> a link to the report, too! 
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">📖</span>
+          <span class="feature-title">User Guide:</span>
+        </span>
+        <br>
+        You’re already here!
+      </li>
+      <li>
+        <span class="icon-title-row">
+          <span class="emoji">🌐</span>
+          <span class="feature-title">Visit midnitetechmods.com:</span>
+        </span>
+        <br>
+        Opens my <a href="https://midnitetechmods.com/">website</a> in your browser.
+      </li>
+    </ul>
+  </div>
+
+  <div class="tip-box">
+    <strong>Tip:</strong> Use the <strong>Backup</strong> feature regularly—especially before major Sims 4 updates or big Mods folder cleanups!
+  </div>
+
+  <div class="footer">
+    <div class="footer-icons">
+      <a href="https://www.patreon.com/c/midnitetech" target="_blank">
+        <img src="https://i.ibb.co/yFd9z0Kz/patreon-logo-png-seeklogo-503893.png" alt="Patreon" width="48" height="48" />
+      </a>
+      <a href="https://midnitetech.tumblr.com/">
+        <img src="https://i.ibb.co/vv14sxjD/free-tumblr-logo-icon-2434-thumb.png" alt="Tumblr" width="48" height="48" />
+      </a>
+      <a href="https://midnitetechmods.com/">
+        <img src="https://i.ibb.co/qLd9d3SR/myprofilepic.png" alt="Midnite Tech Mods" width="48" height="48" />
+      </a>
+    </div>
+    <p><a href="mailto:themidnitetech@gmail.com">email me</a></p>
+    <span>
+      <a href="https://midnitetechmods.com/">midnitetechmods.com</a> &bull; v1.0.0
+    </span>
+  </div>
+  <script>
+    // Simple dark mode toggle - stores preference in localStorage
+    function toggleMode() {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      document.getElementById('toggle-icon').textContent = isDark ? '☀️' : '🌙';
+      document.getElementById('toggle-label').textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      localStorage.setItem('cleanlauncher-theme', isDark ? 'dark' : 'light');
+    }
+    // On load, respect saved preference or system preference
+    (function() {
+      const saved = localStorage.getItem('cleanlauncher-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if ((saved === 'dark') || (!saved && prefersDark)) {
+        document.body.classList.add('dark');
+        document.getElementById('toggle-icon').textContent = '☀️';
+        document.getElementById('toggle-label').textContent = 'Light Mode';
+      }
+    })();
+  </script>
+</body>
+</html>
